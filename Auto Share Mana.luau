@@ -4,13 +4,14 @@ until game:IsLoaded()
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
+
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local GAME_ID = 4870839149
 local Players_In_Server = {}
 local Player_To_Donate = nil
 local Mana_To_Donate = nil
 local Donate_Connection
+
 
 if game.PlaceId ~= GAME_ID then
 	WindUI:Notify({
@@ -36,9 +37,10 @@ end
 RefreshPlayersTable()
 
 local Window = WindUI:CreateWindow({
-	Title = "Mana Auto Share", -- window title
-	Icon = "door-open", -- lucide icon or "rbxassetid://" or URL. optional
-	Author = "by Ripper", -- window subtitle. optional
+	Title = "Mana Auto Share",
+	Icon = "door-open", 
+	Author = "by Ripper", 
+    ToggleKey = Enum.KeyCode.RightControl
 })
 
 local Tab = Window:Tab({
@@ -54,7 +56,8 @@ local Dropdown = Tab:Dropdown({
 	end,
 })
 
-local Input = Tab:Input({
+
+Tab:Input({
 	Title = "Amount Of Mana To Donate At The Time",
 	Callback = function(text)
 		Mana_To_Donate = tonumber(text)
@@ -113,8 +116,4 @@ Players.PlayerAdded:Connect(function()
 	Dropdown:Refresh(Players_In_Server)
 end)
 
-UserInputService.InputBegan:Connect(function(pro, key)
-	if pro then
-		return
-	end
-end)
+
